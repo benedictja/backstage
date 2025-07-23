@@ -26,6 +26,8 @@ dotenvExpand.expand(myEnv);
  */
 
 console.log('TITLE from .env:', process.env.TITLE);
+console.log('APP_BASE_URL from .env:', process.env.APP_BASE_URL);
+console.log('BACKEND_BASE_URL from .env:', process.env.BACKEND_BASE_URL);
 
 import { createBackend } from '@backstage/backend-defaults';
 import { createBackendFeatureLoader } from '@backstage/backend-plugin-api';

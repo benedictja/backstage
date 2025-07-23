@@ -1,6 +1,6 @@
 app:
   title: Backstage Example App
-  baseUrl: http://localhost:3000
+  baseUrl: ${APP_BASE_URL}
   experimental:
     packages: all # ✨
 
@@ -47,14 +47,24 @@ backend:
     # is require for the backend-next to work in this repo
     dangerouslyDisableDefaultAuthPolicy: true
 
-  baseUrl: http://localhost:7007
+  baseUrl: ${BACKEND_BASE_URL}
   listen:
     port: 7007
+  # database:
+  #   client: better-sqlite3
+  #   connection: ':memory:'
+  #   backend:
   database:
-    client: better-sqlite3
-    connection: ':memory:'
+    client: pg
+    connection:
+      host: ${PGHOST}
+      port: ${PGPORT}
+      user: ${PGUSER}
+      password: ${PGPASSWORD}
+      database: ${PGDATABASE}
+
   cors:
-    origin: http://localhost:3000
+    origin: ${APP_BASE_URL}
     methods: [GET, HEAD, PATCH, POST, PUT, DELETE]
     credentials: true
   csp:
@@ -246,6 +256,13 @@ auth:
         clientSecret: ${AUTH_OKTA_CLIENT_SECRET}
         audience: ${AUTH_OKTA_AUDIENCE}
     oauth2:
+      adfs:
+        clientId: ${AUTH_ADFS_CLIENT_ID}
+        clientSecret: ${AUTH_ADFS_CLIENT_SECRET}
+        authorizationUrl: ${AUTH_ADFS_AUTH_URL}
+        tokenUrl: ${AUTH_ADFS_TOKEN_URL}
+        callbackUrl: ${AUTH_ADFS_CALLBACK_URL}
+        scopes: ['openid', 'profile', 'email']
       development:
         clientId: ${AUTH_OAUTH2_CLIENT_ID}
         clientSecret: ${AUTH_OAUTH2_CLIENT_SECRET}
