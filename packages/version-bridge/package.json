@@ -36,7 +36,7 @@
     "test": "backstage-cli package test"
   },
   "devDependencies": {
-    "@backstage/cli": "workspace:^",
+    "@backstage/cli": "^0.33.1",
     "@testing-library/jest-dom": "^6.0.0",
     "@testing-library/react": "^16.0.0",
     "@types/react": "^18.0.0",

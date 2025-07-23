@@ -50,12 +50,12 @@
     "test": "backstage-cli package test"
   },
   "dependencies": {
-    "@backstage/catalog-model": "workspace:^",
-    "@backstage/core-compat-api": "workspace:^",
-    "@backstage/core-components": "workspace:^",
-    "@backstage/core-plugin-api": "workspace:^",
-    "@backstage/errors": "workspace:^",
-    "@backstage/frontend-plugin-api": "workspace:^",
+    "@backstage/catalog-model": "^1.7.5",
+    "@backstage/core-compat-api": "^0.4.4",
+    "@backstage/core-components": "^0.17.4",
+    "@backstage/core-plugin-api": "^1.10.9",
+    "@backstage/errors": "^1.2.7",
+    "@backstage/frontend-plugin-api": "^0.10.4",
     "@material-ui/core": "^4.9.13",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.60",
@@ -63,8 +63,8 @@
     "react-use": "^17.2.4"
   },
   "devDependencies": {
-    "@backstage/cli": "workspace:^",
-    "@backstage/dev-utils": "workspace:^",
+    "@backstage/cli": "^0.33.1",
+    "@backstage/dev-utils": "^1.1.12",
     "@testing-library/jest-dom": "^6.0.0",
     "@testing-library/react": "^16.0.0",
     "@types/react": "^18.0.0",

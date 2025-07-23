@@ -48,13 +48,13 @@
     "test": "backstage-cli package test"
   },
   "dependencies": {
-    "@backstage/errors": "workspace:^",
-    "@backstage/types": "workspace:^",
+    "@backstage/errors": "^1.2.7",
+    "@backstage/types": "^1.2.1",
     "ajv": "^8.10.0",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
-    "@backstage/cli": "workspace:^",
+    "@backstage/cli": "^0.33.1",
     "@types/json-schema": "^7.0.5",
     "@types/lodash": "^4.14.151",
     "yaml": "^2.0.0"

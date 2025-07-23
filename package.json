@@ -113,7 +113,7 @@
     "jest-haste-map@^29.7.0": "patch:jest-haste-map@npm%3A29.7.0#./.yarn/patches/jest-haste-map-npm-29.7.0-e3be419eff.patch"
   },
   "dependencies": {
-    "@backstage/errors": "workspace:^",
+    "@backstage/errors": "^1.2.7",
     "@manypkg/get-packages": "^1.1.3",
     "@types/global-agent": "^2.1.3",
     "@useoptic/optic": "^1.0.0",
@@ -122,12 +122,12 @@
     "yaml": "^2.7.0"
   },
   "devDependencies": {
-    "@backstage/cli": "workspace:*",
-    "@backstage/codemods": "workspace:*",
-    "@backstage/create-app": "workspace:*",
-    "@backstage/e2e-test-utils": "workspace:*",
-    "@backstage/eslint-plugin": "workspace:*",
-    "@backstage/repo-tools": "workspace:*",
+    "@backstage/cli": "^0.33.1",
+    "@backstage/codemods": "^0.1.52",
+    "@backstage/create-app": "^0.7.1",
+    "@backstage/e2e-test-utils": "^0.1.1",
+    "@backstage/eslint-plugin": "^0.1.11",
+    "@backstage/repo-tools": "^0.15.0",
     "@changesets/cli": "^2.14.0",
     "@octokit/rest": "^19.0.3",
     "@playwright/test": "^1.32.3",

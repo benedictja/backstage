@@ -41,7 +41,7 @@
     "@mui/material": "^5.12.2"
   },
   "devDependencies": {
-    "@backstage/cli": "workspace:^",
+    "@backstage/cli": "^0.33.1",
     "@mui/styles": "^5.14.18",
     "@testing-library/jest-dom": "^6.0.0",
     "@testing-library/react": "^16.0.0",

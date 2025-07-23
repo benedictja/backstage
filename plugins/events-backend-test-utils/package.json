@@ -38,9 +38,9 @@
     "test": "backstage-cli package test"
   },
   "dependencies": {
-    "@backstage/plugin-events-node": "workspace:^"
+    "@backstage/plugin-events-node": "^0.4.13"
   },
   "devDependencies": {
-    "@backstage/cli": "workspace:^"
+    "@backstage/cli": "^0.33.1"
   }
 }

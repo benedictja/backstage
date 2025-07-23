@@ -60,11 +60,11 @@
     "test": "backstage-cli package test"
   },
   "dependencies": {
-    "@backstage/catalog-model": "workspace:^",
-    "@backstage/plugin-permission-common": "workspace:^",
-    "@backstage/types": "workspace:^"
+    "@backstage/catalog-model": "^1.7.5",
+    "@backstage/plugin-permission-common": "^0.9.1",
+    "@backstage/types": "^1.2.1"
   },
   "devDependencies": {
-    "@backstage/cli": "workspace:^"
+    "@backstage/cli": "^0.33.1"
   }
 }

@@ -34,10 +34,10 @@
     "postpack": "backstage-cli package postpack"
   },
   "dependencies": {
-    "@backstage/ui": "workspace:^"
+    "@backstage/ui": "^0.6.1"
   },
   "devDependencies": {
-    "@backstage/cli": "workspace:^"
+    "@backstage/cli": "^0.33.1"
   },
   "deprecated": "This package has been deprecated. Please use @backstage/ui instead."
 }

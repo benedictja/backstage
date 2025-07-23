@@ -36,8 +36,8 @@
     "test": "backstage-cli package test"
   },
   "devDependencies": {
-    "@backstage/cli": "workspace:^",
-    "@backstage/test-utils": "workspace:^",
+    "@backstage/cli": "^0.33.1",
+    "@backstage/test-utils": "^1.7.10",
     "msw": "^1.0.0"
   }
 }

@@ -33,13 +33,13 @@
     "test": "backstage-cli package test"
   },
   "dependencies": {
-    "@backstage/backend-plugin-api": "workspace:^",
-    "@backstage/plugin-auth-node": "workspace:^",
-    "@backstage/plugin-permission-common": "workspace:^",
-    "@backstage/plugin-permission-node": "workspace:^"
+    "@backstage/backend-plugin-api": "^1.4.1",
+    "@backstage/plugin-auth-node": "^0.6.5",
+    "@backstage/plugin-permission-common": "^0.9.1",
+    "@backstage/plugin-permission-node": "^0.10.2"
   },
   "devDependencies": {
-    "@backstage/backend-test-utils": "workspace:^",
-    "@backstage/cli": "workspace:^"
+    "@backstage/backend-test-utils": "^1.7.0",
+    "@backstage/cli": "^0.33.1"
   }
 }

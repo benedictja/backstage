@@ -47,8 +47,8 @@
     "fs-extra": "^11.0.0"
   },
   "devDependencies": {
-    "@backstage/cli": "workspace:^",
-    "@backstage/cli-node": "workspace:^",
+    "@backstage/cli": "^0.33.1",
+    "@backstage/cli-node": "^0.2.13",
     "@types/fs-extra": "^11.0.0"
   },
   "peerDependencies": {

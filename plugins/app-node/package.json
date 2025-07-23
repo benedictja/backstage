@@ -36,13 +36,13 @@
     "test": "backstage-cli package test"
   },
   "dependencies": {
-    "@backstage/backend-plugin-api": "workspace:^",
-    "@backstage/config-loader": "workspace:^",
+    "@backstage/backend-plugin-api": "^1.4.1",
+    "@backstage/config-loader": "^1.10.2",
     "@types/express": "^4.17.6",
     "express": "^4.17.1",
     "fs-extra": "^11.2.0"
   },
   "devDependencies": {
-    "@backstage/cli": "workspace:^"
+    "@backstage/cli": "^0.33.1"
   }
 }

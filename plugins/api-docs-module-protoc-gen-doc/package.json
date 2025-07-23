@@ -40,7 +40,7 @@
     "grpc-docs": "^1.1.2"
   },
   "devDependencies": {
-    "@backstage/cli": "workspace:^",
+    "@backstage/cli": "^0.33.1",
     "@testing-library/jest-dom": "^6.0.0",
     "@types/react": "^18.0.0",
     "react": "^18.0.2",

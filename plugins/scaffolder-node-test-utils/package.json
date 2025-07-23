@@ -40,15 +40,15 @@
     "test": "backstage-cli package test"
   },
   "dependencies": {
-    "@backstage/backend-plugin-api": "workspace:^",
-    "@backstage/backend-test-utils": "workspace:^",
-    "@backstage/plugin-scaffolder-node": "workspace:^",
-    "@backstage/types": "workspace:^",
+    "@backstage/backend-plugin-api": "^1.4.1",
+    "@backstage/backend-test-utils": "^1.7.0",
+    "@backstage/plugin-scaffolder-node": "^0.10.0",
+    "@backstage/types": "^1.2.1",
     "winston": "^3.2.1",
     "winston-transport": "^4.7.0"
   },
   "devDependencies": {
-    "@backstage/cli": "workspace:^",
+    "@backstage/cli": "^0.33.1",
     "@types/react": "^18.0.0",
     "react": "^18.0.2",
     "react-dom": "^18.0.2",

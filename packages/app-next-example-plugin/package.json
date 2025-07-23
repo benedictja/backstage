@@ -41,12 +41,12 @@
     "test": "backstage-cli package test"
   },
   "dependencies": {
-    "@backstage/core-components": "workspace:^",
-    "@backstage/frontend-plugin-api": "workspace:^",
+    "@backstage/core-components": "^0.17.4",
+    "@backstage/frontend-plugin-api": "^0.10.4",
     "@material-ui/icons": "^4.9.1"
   },
   "devDependencies": {
-    "@backstage/cli": "workspace:^",
+    "@backstage/cli": "^0.33.1",
     "@types/react": "^18.0.0",
     "cross-fetch": "^4.0.0",
     "msw": "^1.0.0",

@@ -23,16 +23,16 @@
     "test": "backstage-cli package test"
   },
   "dependencies": {
-    "@backstage/frontend-plugin-api": "workspace:^",
-    "@backstage/types": "workspace:^",
-    "@backstage/version-bridge": "workspace:^",
+    "@backstage/frontend-plugin-api": "^0.10.4",
+    "@backstage/types": "^1.2.1",
+    "@backstage/version-bridge": "^1.0.11",
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@backstage/cli": "workspace:^",
-    "@backstage/frontend-app-api": "workspace:^",
-    "@backstage/frontend-test-utils": "workspace:^",
-    "@backstage/test-utils": "workspace:^",
+    "@backstage/cli": "^0.33.1",
+    "@backstage/frontend-app-api": "^0.11.4",
+    "@backstage/frontend-test-utils": "^0.3.4",
+    "@backstage/test-utils": "^1.7.10",
     "@testing-library/jest-dom": "^6.0.0",
     "@testing-library/react": "^16.0.0"
   }
