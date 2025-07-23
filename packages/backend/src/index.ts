@@ -14,6 +14,19 @@
  * limitations under the License.
  */
 
+import dotenv from 'dotenv';
+import dotenvExpand from 'dotenv-expand';
+
+const myEnv = dotenv.config({ path: '/home/benedictja/backstage/.env' });
+dotenvExpand.expand(myEnv);
+
+/*
+ * use env vars like this
+ * const someConfigValue = process.env.SOME_SECRET || 'defaultValue';
+ */
+
+console.log('TITLE from .env:', process.env.TITLE);
+
 import { createBackend } from '@backstage/backend-defaults';
 import { createBackendFeatureLoader } from '@backstage/backend-plugin-api';
 
