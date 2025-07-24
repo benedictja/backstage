@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Backstage Authors
+ * Copyright 2025 The Backstage Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,17 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 import dotenv from 'dotenv';
 import dotenvExpand from 'dotenv-expand';
 
 const myEnv = dotenv.config({ path: '/home/benedictja/backstage/.env' });
 dotenvExpand.expand(myEnv);
-
-/*
- * use env vars like this
- * const someConfigValue = process.env.SOME_SECRET || 'defaultValue';
- */
 
 console.log('TITLE from .env:', process.env.TITLE);
 console.log('APP_BASE_URL from .env:', process.env.APP_BASE_URL);
@@ -34,8 +28,6 @@ import { createBackendFeatureLoader } from '@backstage/backend-plugin-api';
 
 const backend = createBackend();
 
-// An example of how to group together and load multiple features. You can also
-// access root-scoped services by adding `deps`.
 const searchLoader = createBackendFeatureLoader({
   *loader() {
     yield import('@backstage/plugin-search-backend');
@@ -45,15 +37,25 @@ const searchLoader = createBackendFeatureLoader({
   },
 });
 
+// 🔐 ADFS OAuth2
+backend.add(
+  import('./authModuleAdfsProvider').then(m => ({
+    default: m.authModuleAdfsProvider,
+  })),
+);
+
+// 🔐 Existing Auth Modules
 backend.add(import('@backstage/plugin-auth-backend'));
 backend.add(import('./authModuleGithubProvider'));
 backend.add(import('@backstage/plugin-auth-backend-module-guest-provider'));
+
+// 🧩 App Plugins
 backend.add(import('@backstage/plugin-app-backend'));
+backend.add(import('@backstage/plugin-catalog-backend'));
 backend.add(import('@backstage/plugin-catalog-backend-module-unprocessed'));
 backend.add(
   import('@backstage/plugin-catalog-backend-module-scaffolder-entity-model'),
 );
-backend.add(import('@backstage/plugin-catalog-backend'));
 backend.add(import('@backstage/plugin-events-backend'));
 backend.add(import('@backstage/plugin-devtools-backend'));
 backend.add(import('@backstage/plugin-kubernetes-backend'));
@@ -76,6 +78,8 @@ backend.add(import('@backstage/plugin-signals-backend'));
 backend.add(import('@backstage/plugin-notifications-backend'));
 backend.add(import('./instanceMetadata'));
 
+// 🧪 Optional experimental/backstage features
 backend.add(import('@backstage/plugin-events-backend-module-google-pubsub'));
 backend.add(import('@backstage/plugin-mcp-actions-backend'));
+
 backend.start();

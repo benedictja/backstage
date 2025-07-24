@@ -30,13 +30,14 @@
     "test": "backstage-cli package test"
   },
   "dependencies": {
-    "@backstage/backend-defaults": "workspace:^",
+    "@backstage/backend-defaults": "0.11.1",
     "@backstage/backend-plugin-api": "^1.4.1",
     "@backstage/catalog-model": "^1.7.5",
     "@backstage/plugin-app-backend": "workspace:^",
-    "@backstage/plugin-auth-backend": "workspace:^",
-    "@backstage/plugin-auth-backend-module-github-provider": "^0.3.5",
-    "@backstage/plugin-auth-backend-module-guest-provider": "^0.2.10",
+    "@backstage/plugin-auth-backend": "0.25.2",
+    "@backstage/plugin-auth-backend-module-github-provider": "0.3.5",
+    "@backstage/plugin-auth-backend-module-guest-provider": "0.2.10",
+    "@backstage/plugin-auth-backend-module-oauth2-provider": "0.2.5",
     "@backstage/plugin-auth-node": "^0.6.5",
     "@backstage/plugin-catalog-backend": "workspace:^",
     "@backstage/plugin-catalog-backend-module-backstage-openapi": "^0.5.4",
@@ -67,6 +68,8 @@
     "@opentelemetry/auto-instrumentations-node": "^0.61.0",
     "@opentelemetry/exporter-prometheus": "^0.54.0",
     "@opentelemetry/sdk-node": "^0.54.0",
+    "dotenv": "^17.2.0",
+    "dotenv-expand": "^12.0.2",
     "example-app": "link:../app"
   },
   "devDependencies": {
