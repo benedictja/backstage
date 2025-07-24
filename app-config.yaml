@@ -218,13 +218,16 @@ scaffolder:
   defaultCommitMessage: 'Initial commit'
 
   auth:
+  environment: development
   providers:
     adfs:
       development:
         clientId: ${ADFS_CLIENT_ID}
         clientSecret: ${ADFS_CLIENT_SECRET}
-        authorizationUrl: ${ADFS_AUTH_URL}
+        authorizationUrl: ${ADFS_AUTHORIZATION_URL}
         tokenUrl: ${ADFS_TOKEN_URL}
+        callbackUrl: ${AUTH_ADFS_CALLBACK_URL}
+        scopes: ['openid', 'profile', 'email']
 
 # auth:
 #   ### Add auth.keyStore.provider to more granularly control how to store JWK data when running

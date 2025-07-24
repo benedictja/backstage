@@ -38,11 +38,7 @@ const searchLoader = createBackendFeatureLoader({
 });
 
 // 🔐 ADFS OAuth2
-backend.add(
-  import('./authModuleAdfsProvider').then(m => ({
-    default: m.authModuleAdfsProvider,
-  })),
-);
+backend.add(import('./authModuleAdfsProvider'));
 
 // 🔐 Existing Auth Modules
 backend.add(import('@backstage/plugin-auth-backend'));

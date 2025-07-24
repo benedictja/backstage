@@ -37,7 +37,7 @@
     "@backstage/plugin-auth-backend": "0.25.2",
     "@backstage/plugin-auth-backend-module-github-provider": "0.3.5",
     "@backstage/plugin-auth-backend-module-guest-provider": "0.2.10",
-    "@backstage/plugin-auth-backend-module-oauth2-provider": "0.2.5",
+    "@backstage/plugin-auth-backend-module-oauth2-provider": "workspace:^",
     "@backstage/plugin-auth-node": "^0.6.5",
     "@backstage/plugin-catalog-backend": "workspace:^",
     "@backstage/plugin-catalog-backend-module-backstage-openapi": "^0.5.4",
@@ -70,9 +70,11 @@
     "@opentelemetry/sdk-node": "^0.54.0",
     "dotenv": "^17.2.0",
     "dotenv-expand": "^12.0.2",
-    "example-app": "link:../app"
+    "example-app": "link:../app",
+    "passport-oauth2": "^1.6.1"
   },
   "devDependencies": {
-    "@backstage/cli": "^0.33.1"
+    "@backstage/cli": "^0.33.1",
+    "@types/passport-oauth2": "^1.4.15"
   }
 }

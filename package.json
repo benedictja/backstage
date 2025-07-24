@@ -119,10 +119,11 @@
     "@useoptic/optic": "^1.0.0",
     "dotenv": "^17.2.0",
     "dotenv-expand": "^12.0.2",
+    "passport-oauth2": "^1.8.0",
     "yaml": "^2.7.0"
   },
   "devDependencies": {
-    "@backstage/cli": "^0.33.1",
+    "@backstage/cli": "workspace:^",
     "@backstage/codemods": "^0.1.52",
     "@backstage/create-app": "^0.7.1",
     "@backstage/e2e-test-utils": "^0.1.1",
@@ -136,6 +137,7 @@
     "@types/cacheable-request": "^8.3.6",
     "@types/memjs": "^1.3.3",
     "@types/node": "^20.16.0",
+    "@types/passport-oauth2": "^1.8.0",
     "@types/webpack": "^5.28.0",
     "array-to-table": "^1.0.1",
     "command-exists": "^1.2.9",

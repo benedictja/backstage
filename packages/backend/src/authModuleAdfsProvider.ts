@@ -17,42 +17,83 @@ import { createBackendModule } from '@backstage/backend-plugin-api';
 import {
   authProvidersExtensionPoint,
   createOAuthProviderFactory,
+  createOAuthAuthenticator,
+  PassportOAuthAuthenticatorHelper,
+  PassportOAuthDoneCallback,
+  PassportProfile,
+  commonSignInResolvers,
 } from '@backstage/plugin-auth-node';
-import { oauth2Authenticator } from '@backstage/plugin-auth-backend-module-oauth2-provider';
-import {
-  DEFAULT_NAMESPACE,
-  stringifyEntityRef,
-} from '@backstage/catalog-model';
+import { Strategy as OAuth2Strategy } from 'passport-oauth2';
 
-export const authModuleAdfsProvider = createBackendModule({
+// Create the ADFS authenticator
+const adfsAuthenticator = createOAuthAuthenticator({
+  defaultProfileTransform:
+    PassportOAuthAuthenticatorHelper.defaultProfileTransform,
+  scopes: {
+    required: ['openid', 'profile', 'email'],
+  },
+  initialize({ callbackUrl, config }) {
+    const clientId = config.getString('clientId');
+    const clientSecret = config.getString('clientSecret');
+    const authorizationUrl =
+      config.getOptionalString('authorizationUrl') ||
+      'https://adfs.example.com/adfs/oauth2/authorize';
+    const tokenUrl =
+      config.getOptionalString('tokenUrl') ||
+      'https://adfs.example.com/adfs/oauth2/token';
+
+    return PassportOAuthAuthenticatorHelper.from(
+      new OAuth2Strategy(
+        {
+          clientID: clientId,
+          clientSecret: clientSecret,
+          authorizationURL: authorizationUrl,
+          tokenURL: tokenUrl,
+          callbackURL: callbackUrl,
+          scope: ['openid', 'profile', 'email'],
+        },
+        (
+          accessToken: string,
+          refreshToken: string,
+          params: any,
+          profile: PassportProfile,
+          done: PassportOAuthDoneCallback,
+        ) => {
+          done(
+            undefined,
+            { fullProfile: profile, params, accessToken },
+            { refreshToken },
+          );
+        },
+      ),
+    );
+  },
+  async start(input, helper) {
+    return helper.start(input, {});
+  },
+  async authenticate(input, helper) {
+    return helper.authenticate(input, {});
+  },
+  async refresh(input, helper) {
+    return helper.refresh(input);
+  },
+});
+
+const authModuleAdfsProvider = createBackendModule({
   pluginId: 'auth',
   moduleId: 'adfs',
-  register(env) {
-    env.registerInit({
-      deps: { providers: authProvidersExtensionPoint },
+  register(reg) {
+    reg.registerInit({
+      deps: {
+        providers: authProvidersExtensionPoint,
+      },
       async init({ providers }) {
         providers.registerProvider({
           providerId: 'adfs',
           factory: createOAuthProviderFactory({
-            authenticator: oauth2Authenticator,
-            async signInResolver({ result: { fullProfile } }, ctx) {
-              const email = fullProfile.email;
-              if (!email) {
-                throw new Error('User profile did not contain an email');
-              }
-
-              const userEntityRef = stringifyEntityRef({
-                kind: 'User',
-                name: email.split('@')[0],
-                namespace: DEFAULT_NAMESPACE,
-              });
-
-              return ctx.issueToken({
-                claims: {
-                  sub: userEntityRef,
-                  ent: [userEntityRef],
-                },
-              });
+            authenticator: adfsAuthenticator,
+            signInResolverFactories: {
+              ...commonSignInResolvers,
             },
           }),
         });
@@ -60,3 +101,6 @@ export const authModuleAdfsProvider = createBackendModule({
     });
   },
 });
+
+export { authModuleAdfsProvider };
+export default authModuleAdfsProvider;

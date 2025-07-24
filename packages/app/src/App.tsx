@@ -33,6 +33,10 @@ import {
   OAuthRequestDialog,
   SignInPage,
 } from '@backstage/core-components';
+import {
+  adfsAuthApiRef,
+  createAdfsAuthProvider,
+} from '@backstage/core-plugin-api';
 import { ApiExplorerPage } from '@backstage/plugin-api-docs';
 import { CatalogEntityPage, CatalogIndexPage } from '@backstage/plugin-catalog';
 
