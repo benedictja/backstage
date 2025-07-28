@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 import dotenv from 'dotenv';
 import dotenvExpand from 'dotenv-expand';
 
@@ -24,26 +25,10 @@ console.log('APP_BASE_URL from .env:', process.env.APP_BASE_URL);
 console.log('BACKEND_BASE_URL from .env:', process.env.BACKEND_BASE_URL);
 
 import { createBackend } from '@backstage/backend-defaults';
-import { createBackendFeatureLoader } from '@backstage/backend-plugin-api';
 
 const backend = createBackend();
 
-const searchLoader = createBackendFeatureLoader({
-  *loader() {
-    yield import('@backstage/plugin-search-backend');
-    yield import('@backstage/plugin-search-backend-module-catalog');
-    yield import('@backstage/plugin-search-backend-module-explore');
-    yield import('@backstage/plugin-search-backend-module-techdocs');
-  },
-});
-
-// 🔐 Auth Modules
-backend.add(import('./authModuleAdfsProvider'));
-backend.add(import('@backstage/plugin-auth-backend'));
-backend.add(import('./authModuleGithubProvider'));
-backend.add(import('@backstage/plugin-auth-backend-module-guest-provider'));
-
-// 🧩 Core Plugins
+// 🧩 Core Backend Plugins
 backend.add(import('@backstage/plugin-app-backend'));
 backend.add(import('@backstage/plugin-catalog-backend'));
 backend.add(import('@backstage/plugin-catalog-backend-module-unprocessed'));
@@ -51,29 +36,42 @@ backend.add(
   import('@backstage/plugin-catalog-backend-module-scaffolder-entity-model'),
 );
 backend.add(import('@backstage/plugin-events-backend'));
-backend.add(import('@backstage/plugin-devtools-backend'));
 backend.add(import('@backstage/plugin-kubernetes-backend'));
+backend.add(import('@backstage/plugin-permission-backend'));
 backend.add(
   import('@backstage/plugin-permission-backend-module-allow-all-policy'),
 );
-backend.add(import('@backstage/plugin-permission-backend'));
 backend.add(import('@backstage/plugin-proxy-backend'));
 backend.add(import('@backstage/plugin-scaffolder-backend'));
 backend.add(import('@backstage/plugin-scaffolder-backend-module-github'));
 backend.add(
   import('@backstage/plugin-scaffolder-backend-module-notifications'),
 );
+backend.add(import('@backstage/plugin-techdocs-backend'));
+backend.add(import('@backstage/plugin-search-backend'));
+backend.add(import('@backstage/plugin-search-backend-module-catalog'));
+backend.add(import('@backstage/plugin-search-backend-module-explore'));
+backend.add(import('@backstage/plugin-search-backend-module-techdocs'));
+backend.add(import('@backstage/plugin-signals-backend'));
+backend.add(import('@backstage/plugin-notifications-backend'));
+
+// 🧪 Optional / Experimental Plugins
+backend.add(import('@backstage/plugin-events-backend-module-google-pubsub'));
+backend.add(import('@backstage/plugin-mcp-actions-backend'));
 backend.add(
   import('@backstage/plugin-catalog-backend-module-backstage-openapi'),
 );
-backend.add(searchLoader);
-backend.add(import('@backstage/plugin-techdocs-backend'));
-backend.add(import('@backstage/plugin-signals-backend'));
-backend.add(import('@backstage/plugin-notifications-backend'));
+backend.add(import('@backstage/plugin-devtools-backend'));
+
+// 🔐 Auth Modules
+// ⚠️ Order matters: custom providers must register before the core auth backend
+backend.add(import('./authModuleAdfsProvider'));
+backend.add(import('./authModuleGithubProvider'));
+backend.add(import('@backstage/plugin-auth-backend'));
+backend.add(import('@backstage/plugin-auth-backend-module-guest-provider'));
+
+// 🧾 Misc / Metadata
 backend.add(import('./instanceMetadata'));
 
-// 🧪 Optional / Experimental
-backend.add(import('@backstage/plugin-events-backend-module-google-pubsub'));
-backend.add(import('@backstage/plugin-mcp-actions-backend'));
-
+// ✅ Start the Backend
 backend.start();
