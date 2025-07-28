@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Backstage Authors
+ * Copyright 2025 The Backstage Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 import {
   RELATION_API_CONSUMED_BY,
   RELATION_API_PROVIDED_BY,
@@ -28,22 +27,14 @@ import {
 } from '@backstage/catalog-model';
 import { createApp } from '@backstage/app-defaults';
 import { AppRouter, FeatureFlagged, FlatRoutes } from '@backstage/core-app-api';
-import {
-  AlertDisplay,
-  OAuthRequestDialog,
-  SignInPage,
-} from '@backstage/core-components';
-import {
-  adfsAuthApiRef,
-  createAdfsAuthProvider,
-} from '@backstage/core-plugin-api';
+import { AlertDisplay, OAuthRequestDialog } from '@backstage/core-components';
+import { SignInPage } from './components/SignInPage';
+
 import { ApiExplorerPage } from '@backstage/plugin-api-docs';
 import { CatalogEntityPage, CatalogIndexPage } from '@backstage/plugin-catalog';
-
 import { CatalogGraphPage } from '@backstage/plugin-catalog-graph';
 import { CatalogImportPage } from '@backstage/plugin-catalog-import';
 import { HomepageCompositionRoot, VisitListener } from '@backstage/plugin-home';
-
 import { ScaffolderPage } from '@backstage/plugin-scaffolder';
 import {
   ScaffolderFieldExtensions,
@@ -65,16 +56,16 @@ import {
   SettingsLayout,
   UserSettingsPage,
 } from '@backstage/plugin-user-settings';
-import { AdvancedSettings } from './components/advancedSettings';
+
 import AlarmIcon from '@material-ui/icons/Alarm';
 import { Navigate, Route } from 'react-router-dom';
+
 import { apis } from './apis';
 import { entityPage } from './components/catalog/EntityPage';
 import { Root } from './components/Root';
 import { DelayingComponentFieldExtension } from './components/scaffolder/customScaffolderExtensions';
 import { defaultPreviewTemplate } from './components/scaffolder/defaultPreviewTemplate';
 import { searchPage } from './components/search/SearchPage';
-import { providers } from './identityProviders';
 import { SignalsDisplay } from '@backstage/plugin-signals';
 import { techDocsPage } from './components/techdocs/TechDocsPage';
 import { RequirePermission } from '@backstage/plugin-permission-react';
@@ -89,11 +80,11 @@ import {
 } from '@backstage/plugin-notifications';
 import { CustomizableHomePage } from './components/home/CustomizableHomePage';
 import { HomePage } from './components/home/HomePage';
+import { AdvancedSettings } from './components/advancedSettings';
 
 const app = createApp({
   apis,
   icons: {
-    // Custom icon example
     alert: AlarmIcon,
   },
   featureFlags: [
@@ -104,24 +95,13 @@ const app = createApp({
     },
   ],
   components: {
-    SignInPage: props => {
-      return (
-        <SignInPage
-          {...props}
-          providers={['guest', 'custom', ...providers]}
-          title="Select a sign-in method"
-          align="center"
-        />
-      );
-    },
+    SignInPage: props => <SignInPage {...props} />,
   },
 });
 
 const routes = (
   <FlatRoutes>
     <Route path="/" element={<Navigate to="catalog" />} />
-
-    {/* TODO(rubenl): Move this to / once its more mature and components exist */}
 
     <FeatureFlagged with="customizable-home-page-preview">
       <Route path="/home" element={<HomepageCompositionRoot />}>
@@ -232,6 +212,7 @@ const routes = (
         />
       </SettingsLayout.Route>
     </Route>
+
     <Route path="/devtools" element={<DevToolsPage />}>
       {customDevToolsPage}
     </Route>
