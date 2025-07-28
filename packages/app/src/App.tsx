@@ -28,7 +28,8 @@ import {
 import { createApp } from '@backstage/app-defaults';
 import { AppRouter, FeatureFlagged, FlatRoutes } from '@backstage/core-app-api';
 import { AlertDisplay, OAuthRequestDialog } from '@backstage/core-components';
-import { SignInPage } from './components/SignInPage';
+// import { SignInPage } from './components/SignInPage';
+import { ProxiedSignInPage } from '@backstage/core-components';
 
 import { ApiExplorerPage } from '@backstage/plugin-api-docs';
 import { CatalogEntityPage, CatalogIndexPage } from '@backstage/plugin-catalog';
@@ -95,7 +96,12 @@ const app = createApp({
     },
   ],
   components: {
-    SignInPage: props => <SignInPage {...props} />,
+    SignInPage: props => (
+      <ProxiedSignInPage
+        {...props}
+        provider="adfs" // must match your backend providerId
+      />
+    ),
   },
 });
 
