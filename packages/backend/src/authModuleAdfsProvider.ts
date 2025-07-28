@@ -13,7 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { createBackendModule } from '@backstage/backend-plugin-api';
+import {
+  createBackendModule,
+  coreServices,
+} from '@backstage/backend-plugin-api';
+
 import {
   authProvidersExtensionPoint,
   createOAuthProviderFactory,
@@ -23,9 +27,10 @@ import {
   PassportProfile,
   commonSignInResolvers,
 } from '@backstage/plugin-auth-node';
+
 import { Strategy as OAuth2Strategy } from 'passport-oauth2';
 
-// Create the ADFS authenticator
+// ✅ Define the ADFS OAuth2 authenticator
 const adfsAuthenticator = createOAuthAuthenticator({
   defaultProfileTransform:
     PassportOAuthAuthenticatorHelper.defaultProfileTransform,
@@ -36,10 +41,10 @@ const adfsAuthenticator = createOAuthAuthenticator({
     const clientId = config.getString('clientId');
     const clientSecret = config.getString('clientSecret');
     const authorizationUrl =
-      config.getOptionalString('authorizationUrl') ||
+      config.getOptionalString('authorizationUrl') ??
       'https://adfs.example.com/adfs/oauth2/authorize';
     const tokenUrl =
-      config.getOptionalString('tokenUrl') ||
+      config.getOptionalString('tokenUrl') ??
       'https://adfs.example.com/adfs/oauth2/token';
 
     return PassportOAuthAuthenticatorHelper.from(
@@ -79,6 +84,7 @@ const adfsAuthenticator = createOAuthAuthenticator({
   },
 });
 
+// ✅ Register the module with Backstage
 const authModuleAdfsProvider = createBackendModule({
   pluginId: 'auth',
   moduleId: 'adfs',
@@ -86,8 +92,10 @@ const authModuleAdfsProvider = createBackendModule({
     reg.registerInit({
       deps: {
         providers: authProvidersExtensionPoint,
+        logger: coreServices.logger,
       },
-      async init({ providers }) {
+      async init({ providers, logger }) {
+        logger.info('✅ ADFS provider initialized');
         providers.registerProvider({
           providerId: 'adfs',
           factory: createOAuthProviderFactory({

@@ -37,15 +37,13 @@ const searchLoader = createBackendFeatureLoader({
   },
 });
 
-// 🔐 ADFS OAuth2
+// 🔐 Auth Modules
 backend.add(import('./authModuleAdfsProvider'));
-
-// 🔐 Existing Auth Modules
 backend.add(import('@backstage/plugin-auth-backend'));
 backend.add(import('./authModuleGithubProvider'));
 backend.add(import('@backstage/plugin-auth-backend-module-guest-provider'));
 
-// 🧩 App Plugins
+// 🧩 Core Plugins
 backend.add(import('@backstage/plugin-app-backend'));
 backend.add(import('@backstage/plugin-catalog-backend'));
 backend.add(import('@backstage/plugin-catalog-backend-module-unprocessed'));
@@ -74,7 +72,7 @@ backend.add(import('@backstage/plugin-signals-backend'));
 backend.add(import('@backstage/plugin-notifications-backend'));
 backend.add(import('./instanceMetadata'));
 
-// 🧪 Optional experimental/backstage features
+// 🧪 Optional / Experimental
 backend.add(import('@backstage/plugin-events-backend-module-google-pubsub'));
 backend.add(import('@backstage/plugin-mcp-actions-backend'));
 
